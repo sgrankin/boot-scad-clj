@@ -20,7 +20,7 @@
     (spit (-> in-file
               io/reader
               load-reader
-              m/write-scad))))
+              scad/write-scad))))
 
 (defn- clj->scad
   [path]
