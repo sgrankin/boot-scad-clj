@@ -2,11 +2,14 @@
          '[boot.task.built-in :refer :all]
          '[clojure.java.io :as io])
 (set-env!
-  :dependencies
-  '[[boot/core "2.6.0" :scope "provided"]
-    [onetom/boot-lein-generate "0.1.3" :scope "test"]
-    [scad-clj "0.5.2"]]
-  :source-paths #{"src"})
+ :dependencies
+ '[[org.clojure/clojure "1.9.0" :scope "provided"]
+   [boot/core "2.7.2" :scope "provided"]
+   [onetom/boot-lein-generate "0.1.3" :scope "test"]
+   [scad-clj "0.5.2"]]
+ :source-paths #{"src"}
+ :resource-paths #{"lib"}
+ )
 
 (require '[boot.lein])
 (boot.lein/generate)
@@ -32,7 +35,8 @@
   (with-pre-wrap fileset
     (let [tmp (tmp-dir!)
           in-files (input-files fileset)
-          in-files (by-ext [".clj"] in-files)]
+          in-files (by-ext [".clj"] in-files)
+          ]
       (empty-dir! tmp)
       (doseq [in in-files]
         (let [in-file (tmp-file in)
@@ -43,3 +47,5 @@
       (-> fileset
           (add-asset tmp)
           commit!))))
+
+; vim:set ft=clojure:
